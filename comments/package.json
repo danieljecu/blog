@@ -1,0 +1,21 @@
+{
+  "name": "comments",
+  "version": "1.0.0",
+  "description": "comments service",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "test"
+  },
+  "author": "daniel.jecu",
+  "license": "ISC"
+}
