@@ -10,8 +10,8 @@ export default () => {
                 <div key={post.id} className="card" style={{width: '30%', marginBottom: '20px'}}>
                     <div className="card-body">
                         <h3>{post.title}</h3>
-                        <CommentCreate postId={post.id} />
                         <CommentsListByPost postId={post.id}/>
+                        <CommentCreate postId={post.id} />
                     </div>
                 </div>);
         }
@@ -26,7 +26,7 @@ export default () => {
        setPosts(res.data);
         console.log(posts)
     }
-    return <div className="f-flex flex-row flex-wrap justify-content-between">
+    return <div className="d-flex flex-row flex-wrap justify-content-between">
         {renderPosts}
     </div>;
 }
