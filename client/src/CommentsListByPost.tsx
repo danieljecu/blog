@@ -15,22 +15,19 @@ function CommentsListByPost({ postId }: { postId: String }) {
 
   useEffect(() => {
     fetchComments();
-  },[]);
-
+  }, []);
 
   const renderComments = comments.map((comment) => {
     return comment ? (
-        <li key={String(comment.id)}> {comment.content}</li>
+      <li key={String(comment.id)}> {comment.content}</li>
     ) : (
-        "loading comment..."
+      "loading comment..."
     );
-  })
+  });
 
   return (
     <div>
-      <ul>
-        {renderComments}
-      </ul>
+      <ul>{renderComments}</ul>
     </div>
   );
 }

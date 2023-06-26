@@ -26,4 +26,6 @@ yarn-error.log*
 /comments/.idea/*
 /posts/node_modules/*
 /posts/.idea/*
+/event-bus/node_modules/*
+/event-bus/.idea/*
 
