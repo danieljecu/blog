@@ -22,10 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/comments/node_modules/*
-/comments/.idea/*
-/posts/node_modules/*
-/posts/.idea/*
-/event-bus/node_modules/*
-/event-bus/.idea/*
+/**/node_modules/*
+/**/.idea/*
 
