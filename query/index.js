@@ -35,15 +35,32 @@ app.post('/events', (req, res)=>{
 
     if (req.body.type === 'CommentUpdated'){
         const {id, content, postId, status} = req.body.data;
-        let post = posts[postId];
-        const comment = post.comments.find(comment=> comment.id===id );
+        try{
+            let post = posts[postId];
+            const comment = post.comments.find(comment=> comment.id===id );
 
-        comment.status= status;
-        comment.content= content;
+            comment.status= status;
+            comment.content= content;
+        }catch (e) {
+            // should handle the exception where posts[postId] might not have been initialized
+            console.log("CommentUpdated error",e.message);
+        }
+
     }
     res.send({});
 })
 
-app.listen(4002, ()=>{
+app.listen(4002, async ()=>{
     console.log("Listening on 4002")
+    // try {
+    //     const res = await axios.get("http://localhost:4005/events");
+    //
+    //     for (let event of res.data) {
+    //         console.log("Processing event:", event.type);
+    //
+    //         handleEvent(event.type, event.data);
+    //     }
+    // } catch (error) {
+    //     console.log(error.message);
+    // }
 })
