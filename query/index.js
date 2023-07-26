@@ -2,6 +2,7 @@ const express =require('express');
 const bodyParser = require('body-parser');
 
 const cors = require('cors');
+const axios = require("axios");
 
 const app= express();
 
@@ -11,21 +12,16 @@ app.use(cors());
 //posts === { 'j121212j':{id, title, comments:[ {id, content} ]}
 let posts= {}
 
-app.get('/posts', (req,res)=>{
-    res.send(posts);
-})
-
-app.post('/events', (req, res)=>{
-
-    if (req.body.type ==='PostCreated'){
-        const {id, title}= req.body.data;
+const handleEvent = (type, data)=>{
+    if (type ==='PostCreated'){
+        const {id, title}= data;
         posts[id] = { id,title, comments: []}
 
         console.log(posts[id])
     }
 
-    if (req.body.type ==='CommentCreated'){
-        const {id, content, postId, status} = req.body.data;
+    if (type ==='CommentCreated'){
+        const {id, content, postId, status} = data;
         let post = posts[postId];
 
         post.comments.push({id, content, status})
@@ -33,8 +29,8 @@ app.post('/events', (req, res)=>{
         console.log(post);
     }
 
-    if (req.body.type === 'CommentUpdated'){
-        const {id, content, postId, status} = req.body.data;
+    if (type === 'CommentUpdated'){
+        const {id, content, postId, status} = data;
         try{
             let post = posts[postId];
             const comment = post.comments.find(comment=> comment.id===id );
@@ -47,20 +43,31 @@ app.post('/events', (req, res)=>{
         }
 
     }
+}
+
+app.get('/posts', (req,res)=>{
+    res.send(posts);
+})
+
+app.post('/events', (req, res)=>{
+    const {type, data} = req.body;
+    handleEvent(type,data);
     res.send({});
 })
 
 app.listen(4002, async ()=>{
     console.log("Listening on 4002")
-    // try {
-    //     const res = await axios.get("http://localhost:4005/events");
-    //
-    //     for (let event of res.data) {
-    //         console.log("Processing event:", event.type);
-    //
-    //         handleEvent(event.type, event.data);
-    //     }
-    // } catch (error) {
-    //     console.log(error.message);
-    // }
+
+    try {
+        const res = await axios.get("http://localhost:4005/events");
+
+        for (let event of res.data) {
+            console.log("Processing event:", event.type);
+
+            handleEvent(event.type, event.data);
+        }
+    } catch (error) {
+        console.log(error.message);
+        throw error;
+    }
 })
