@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 
 const events= [];
 
+const post_clusterip_serv= "http://post-clusterip-serv:4000/events" //http://localhost:4000/events
+
 app.post("/events", (req, res) => {
   const event = req.body;
 
@@ -15,10 +17,10 @@ app.post("/events", (req, res) => {
 
   console.log("event", event)
   try {
-    axios.post("http://localhost:4000/events", event);//posts
-    axios.post("http://localhost:4001/events", event);//comments
-    axios.post("http://localhost:4002/events", event);//query
-    axios.post("http://localhost:4003/events", event);//moderation
+    axios.post(post_clusterip_serv, event);//posts
+    // axios.post("http://localhost:4001/events", event);//comments
+    // axios.post("http://localhost:4002/events", event);//query
+    // axios.post("http://localhost:4003/events", event);//moderation
   } catch (err) {
     console.log(err.message);
   }

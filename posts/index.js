@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const axios = require('axios');
 
+const event_bus= "http://event-bus-srv:4005/events";//http://localhost:4005/events
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -21,7 +23,7 @@ app.post("/posts", async(req, res) => {
 
   posts[id] = { id, title };
 
-  await axios.post('http://localhost:4005/events', {type: "PostCreated", data: { id, title } })
+  await axios.post(event_bus, {type: "PostCreated", data: { id, title } })
 
   res.status(201).send(posts[id]);
 });
