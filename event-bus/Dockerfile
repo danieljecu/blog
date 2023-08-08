@@ -10,4 +10,4 @@ COPY ./ ./
 
 CMD ["npm", "start"]
 
-ENTRYPOINT ["sh", "-c"]
+#ENTRYPOINT ["sh", "-c"]

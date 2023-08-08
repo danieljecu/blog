@@ -1,4 +1,4 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: event-bus-depl
@@ -7,14 +7,14 @@ spec:
   selector:
     matchLabels:
       app: event-bus
-    template:
-      metadata:
-        labels:
-          app: event-bus
-      spec:
-        containers:
-          - name: event-bus
-            image: cjecu/event-bus:0.0.1
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: cjecu/event-bus
 ---
 apiVersion: v1
 kind: Service
@@ -23,6 +23,7 @@ metadata:
 spec:
   selector:
     app: event-bus
+  type: ClusterIP # the default type, can be omitted
   ports:
     - name: event-bus
       protocol: TCP

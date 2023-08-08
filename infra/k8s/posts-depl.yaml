@@ -1,4 +1,4 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: posts-depl
@@ -7,14 +7,15 @@ spec:
   selector:
     matchLabels:
       app: posts
-    template:
-      metadata:
-        labels:
-          app: posts
-      spec:
-        containers:
-          - name: post
-            image: cjecu/posts:0.0.1
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: post
+          image: cjecu/posts
+
 ---
 apiVersion: v1
 kind: Service
