@@ -1,0 +1,28 @@
+Part 1 create services -- MINI microservices app
+3000 client
+4005 event
+query service — has posts and comments
+
+part 2 create images and push them to [dockerhub](https://hub.docker.com/u/cjecu) 
+
+part 3 some basic commands
+docker build -t cjecu/posts . ## t for tag
+docker images
+docker run [image id or image tag]
+docker run -it [image id or image tag] [cmd -- overide default command which is npm start]
+    eg : docker run -it cjecu/posts sh
+docker ps
+docker exec -it 
+docker logs [container id] 
+
+part 4 Kubernetes   
+for linux -- needs minikube
+service is a way to refer 
+
+kubectl get pods
+kubectl exec -it [pod_name] [cmd]
+kubectl apply -f [config_file_name]
+kubectl describe pod [pod_name]
+
+---
+kubectl config view -- for multiple config files
