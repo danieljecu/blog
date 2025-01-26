@@ -4,8 +4,8 @@ const cors = require("cors");
 
 const axios = require('axios');
 
-// const event_bus= "http://event-bus-srv:4005/events";
-const event_bus= "http://localhost:4005/events";
+const event_bus= "http://event-bus-srv:4005/events";
+//const event_bus= "http://localhost:4005/events";
 
 const app = express();
 app.use(bodyParser.json());
